@@ -1,5 +1,6 @@
 package com.demoapp.sunset
 
+import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
@@ -46,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         val sunsetSkyAnimator = ObjectAnimator
             .ofInt(skyView, "backgroundColor", blueSkyColor, sunsetColor)
             .setDuration(3000)
+
+        sunsetSkyAnimator.setEvaluator(ArgbEvaluator())
 
         heightAnimator.start()
         sunsetSkyAnimator.start()
