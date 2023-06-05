@@ -1,16 +1,27 @@
 package com.demoapp.sunset
 
 import android.animation.ObjectAnimator
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var sceneView: View
     private lateinit var sunView: View
     private lateinit var skyView: View
+
+    private val blueSkyColor: Int by lazy {
+        ContextCompat.getColor(this, R.color.blue_sky)
+    }
+    private val sunsetColor: Int by lazy {
+        ContextCompat.getColor(this, R.color.sunset_sky)
+    }
+    private val nightSkyColor: Int by lazy {
+        ContextCompat.getColor(this, R.color.night_sky)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +43,11 @@ class MainActivity : AppCompatActivity() {
             .setDuration(3000)
         heightAnimator.interpolator = AccelerateInterpolator()
 
+        val sunsetSkyAnimator = ObjectAnimator
+            .ofInt(skyView, "backgroundColor", blueSkyColor, sunsetColor)
+            .setDuration(3000)
+
         heightAnimator.start()
+        sunsetSkyAnimator.start()
     }
 }
